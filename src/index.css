@@ -1,0 +1,388 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "inter", sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on Hover */
+::-webkit-scrollbar-track:hover {
+  background: #555;
+}
+
+/* Head navigation bar */
+
+.header-nav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 25px;
+  padding: 10px;
+}
+
+.header-nav-2 a {
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-btn {
+  width: 100px;
+  padding: 0.8rem 0;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 4px;
+  margin: 0 10px;
+}
+
+.first {
+  color: #005224;
+  background-color: #e8efe9;
+  font-size: 10px;
+}
+
+.second {
+  color: #fdfdfd;
+  background-color: #005224;
+}
+
+.img-cart {
+  height: 40px;
+  padding-right: 5px;
+}
+
+.currentlyActive {
+  position: relative;
+}
+
+.header-nav .currentlyActive::after {
+  content: url("https://pizzajungleng.com/images/dashline.svg");
+  height: 2px;
+  position: absolute;
+  left: calc(50% + 5px);
+  transform: translateX(-50%);
+  bottom: 20px;
+}
+
+/* Home page */
+.first-section {
+  background-position: 50%;
+  background-size: cover;
+  width: 100%;
+  height: 90vh;
+  position: relative;
+  background-image: url(/public/pj-back.webp);
+}
+
+.pizza-1 {
+  margin-left: -15%;
+  width: 480px;
+  height: auto;
+  object-fit: contain;
+}
+
+.pizza-2 {
+  margin-right: -25%;
+  width: 680px;
+  height: auto;
+  object-fit: contain;
+}
+
+.images {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.first-section .images .pizza-1,
+.first-section .images .pizza-2 {
+  animation: rotation 8s infinite linear;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.home_text {
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 45%;
+  position: absolute;
+  text-align: center;
+  /* z-index: 100; */
+}
+
+.home_text_header {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #005224;
+  letter-spacing: 1.1px;
+}
+
+.home_text_text {
+  color: #62626c;
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  line-height: 1rem;
+}
+
+.select_container {
+  position: relative;
+  left: 11%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 2.5rem;
+  width: 350px;
+}
+
+.select_input {
+  appearance: none;
+  border: 2px solid #62626c;
+  border-radius: 0.3rem;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #62626c;
+  width: 100%;
+  background: url(src/assets/dropdown-arrow.svg) 97% no-repeat;
+  background-size: 18px;
+}
+
+.second-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 0 5rem;
+  height: 70vh;
+}
+
+.second-section .deal_hand_image {
+  position: absolute;
+  width: 9rem;
+  height: 8rem;
+  left: 0;
+  bottom: 0%;
+  z-index: -1000;
+}
+
+.top-deals {
+  min-width: 1300px;
+  position: relative;
+}
+
+.deals-header {
+  text-align: center;
+  color: #62626c;
+  padding: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 2.3rem;
+}
+
+.top-deals .deal-image-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deal-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+}
+
+.deal-img-container {
+  margin-bottom: 1rem;
+  padding: 0 0.7rem;
+  cursor: pointer;
+}
+
+.third-section-adverts {
+  display: flex;
+  justify-content: center;
+}
+
+.advert-container {
+  min-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 0 5rem;
+  height: 40vh;
+}
+
+.advert-page1 {
+  min-width: 500px;
+  height: 30vh;
+  margin: 2rem 0;
+}
+
+.advert-page2 {
+  margin: 2rem 0;
+  min-width: 500px;
+  height: 39vh;
+}
+
+.advert-page1 img {
+  width: 300px;
+  height: 480px;
+  object-fit: contain;
+  position: absolute;
+  margin-top: -10rem;
+  left: 15%;
+}
+
+.advert-link {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 15px;
+}
+
+/* About page */
+.about-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: 100%;
+  height: 100%;
+  font-family: Gilroy, sans-serif;
+  color: #62626c;
+  font-size: 1.6rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.row > div {
+  width: 100%;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+/* Footer Page */
+
+.footer-container {
+  width: 100%;
+}
+
+.footer-col {
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  background-image: url(./assets/footer-bg.png);
+  background-position: 50%;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.footer-icons {
+  margin-top: 1.6rem;
+  gap: 3rem;
+  display: flex;
+  z-index: 10;
+}
+
+/* 
+MENU/menuLayout PAGE
+Header styles
+*/
+
+.nav-pills {
+  display: flex;
+  gap: 1rem;
+  padding: 5px 4px 8px 0;
+  margin: 0 4px 0 0;
+  overflow-x: auto;
+}
+
+.nav-pills .nav-item {
+  color: #55555a !important;
+  font-size: 18px;
+  border: 2px solid #fff;
+  padding: 6px 16px;
+  border-radius: 3rem;
+  display: block;
+  background: #fff;
+}
+
+.nav-img {
+  height: 1rem;
+}
+
+.select-row {
+  display: flex;
+  gap: 1rem;
+  margin: 0 4px 0 0;
+  padding: 5px 4px 8px 0;
+}
+
+.select-row-form {
+  appearance: none;
+  border-radius: 0.3rem;
+  border: 2px solid #005224 !important;
+  padding: 0.4rem;
+  font-size: 1.1rem;
+  color: #62626c;
+  width: 200px;
+  cursor: pointer;
+  background: url(src/assets/dropdown-arrow.svg) 97% no-repeat;
+  background-size: 18px;
+}

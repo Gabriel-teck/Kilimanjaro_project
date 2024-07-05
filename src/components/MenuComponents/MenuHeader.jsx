@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import LocationSelector, { states } from "./LocationSelector";
+import LocationSelector, {
+  states,
+} from "../SelectorComponents/LocationSelector";
 import { Box } from "@mui/material";
 
 const MenuHeader = () => {
-//   const [state, setState] = useState("Select State");
-//   const [selectState, setSelectState] = useState([]);
+  //   const [state, setState] = useState("Select State");
+  //   const [selectState, setSelectState] = useState([]);
 
-//   const changeState = (e) => {
-//     setState(e.target.value);
-//     const selectedItem = states.find(
-//       (state) => state.state_id == e.target.value
-//     );
-//     setSelectState(selectedItem.restaurants);
-//   };
+  //   const changeState = (e) => {
+  //     setState(e.target.value);
+  //     const selectedItem = states.find(
+  //       (state) => state.state_id == e.target.value
+  //     );
+  //     setSelectState(selectedItem.restaurants);
+  //   };
 
   return (
     <>
@@ -36,7 +38,8 @@ const MenuHeader = () => {
         >
           <Box className="nav-pills">
             <button className="nav-item">
-              <img className="nav-img"
+              <img
+                className="nav-img"
                 src="https://pizzajungleng.com/images/deals-icon.svg"
                 alt="deals"
               />

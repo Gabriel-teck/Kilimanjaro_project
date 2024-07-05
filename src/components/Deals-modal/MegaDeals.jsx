@@ -1,7 +1,8 @@
 import React from "react";
 import Cart from "../../assets/cart-item.png";
+import { PizzaSelector } from "./PizzaSelector";
 
-export const Topdeals1 = ({ onClose1 }) => {
+export const MegaDeals = ({ onClose }) => {
   return (
     <>
       <div className="modalBackground5">
@@ -10,7 +11,7 @@ export const Topdeals1 = ({ onClose1 }) => {
             <div className="modal-content product-modal">
               <div className="modal-header p-0">
                 <button type="button" className="btn-close ms-auto pt-3 pe-5">
-                  <span onClick={onClose1} style={{ border: "none" }}>
+                  <span onClick={onClose} style={{ border: "none" }}>
                     X
                   </span>
                 </button>
@@ -20,7 +21,7 @@ export const Topdeals1 = ({ onClose1 }) => {
                   <div className="col-sm col12 col-img mx-auto">
                     <div className="popup_img text-center">
                       <img
-                        src="https://admin.pizzajungleng.com/storage/gallery/pj_party_promo3_1701208812.jpg"
+                        src="https://admin.pizzajungleng.com/storage/gallery/Pizza_in_Nigeria__-_Copy_(2)_1701208419.jpg"
                         alt="deals"
                         className="deals"
                       />
@@ -28,26 +29,17 @@ export const Topdeals1 = ({ onClose1 }) => {
                   </div>
                   <div className="col">
                     <div className="product-details">
-                      <h3 className="popup_title">Party Deals</h3>
+                      <h3 className="popup_title">Mega Tuesday Deal</h3>
                       <p class="popup_description">
-                        Buy 5 Large Pizza And Get 1 Large Pizza Free
+                        Buy 1 Large Pizza and get 1 free Medium Pizza
                       </p>
                       <div className="popup_select d-flex justify-content-between">
                         <div className="popup_select-size me-4">
                           <button className="popup-btn">
-                            <span>1st Pizza</span>
+                            <span>Pizza Deal</span>
                           </button>
                           <button className="popup-btn">
-                            <span>2nd Pizza</span>
-                          </button>
-                          <button className="popup-btn">
-                            <span>3rd Pizza</span>
-                          </button>
-                          <button className="popup-btn">
-                            <span>4th Pizza</span>
-                          </button>
-                          <button className="popup-btn">
-                            <span>5th Pizza</span>
+                            <span>Free Pizza</span>
                           </button>
                         </div>
                         <div>
@@ -55,7 +47,9 @@ export const Topdeals1 = ({ onClose1 }) => {
                             <h6 class="topping_header">
                               Choose Your 1st Pizza
                             </h6>
-                            <div className="d-flex flex-wrap gap-3"></div>
+                            <div className="d-flex flex-wrap gap-3">
+                              <PizzaSelector />
+                            </div>
                           </div>
                         </div>
                       </div>

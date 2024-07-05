@@ -1,26 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import HandImg from "../assets/hand-green.svg";
-import Deal1 from "../assets/deals1.jpeg";
-import Deal2 from "../assets/deals2.jpeg";
+
 import Phone from "../assets/mobile-phone.webp";
 import Pizza from "../assets/pizza-illu.svg";
 import { Link, useNavigate } from "react-router-dom";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Topdeals1 } from "./modal/Topdeals1";
-import { Topdeals2 } from "./modal/Topdeals2";
-import "./modal/modalCss/modal.css";
-import LocationSelector from "../components/LocationSelector";
+import "../components/Deals-modal/modal.css";
+import LocationSelector from "../components/SelectorComponents/LocationSelector";
+import { TopDeals } from "../components/Deals-modal/TopDeals";
 
 const Home = () => {
   const navigate = useNavigate();
-  
 
   //creating a state for the DealsModal
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
-
-  
 
   const changeRestaurant = (e) => {
     navigate("/menu");
@@ -35,9 +29,9 @@ const Home = () => {
     setShowModal2(!showModal2);
   };
 
-  const onClose1 = () => {
+  const onClose = () => {
     setShowModal1(false);
-    
+    setShowModal2(false);
   };
 
   // const onClose2 = () => {
@@ -69,35 +63,18 @@ const Home = () => {
           <p className="home_text_text">
             Choose from a variety of freshly made pizzas
           </p>
-
           <LocationSelector onResturantChange={changeRestaurant} />
         </Box>
       </div>
       <Box className="second-section">
+        <TopDeals
+          showModal1={showModal1}
+          showModal2={showModal2}
+          handleToggleImage1={handleToggleImage1}
+          handleToggleImage2={handleToggleImage2}
+          onClose={onClose}
+        />
         <img className="deal_hand_image" src={HandImg} alt="deal hand"></img>
-        <div className="top-deals">
-          <h1 className="deals-header">Top Deals</h1>
-          <div className="deal-image-row">
-            <div className="deal-img-container">
-              <img
-                className="deal-img"
-                src={Deal1}
-                alt="Deals image"
-                onClick={handleToggleImage1}
-              ></img>
-              {showModal1 && <Topdeals1 onClose1={onClose1} />}
-            </div>
-            <div className="deal-img-container">
-              <img
-                className="deal-img"
-                src={Deal2}
-                alt="Deals image"
-                onClick={handleToggleImage2}
-              ></img>
-              {showModal2 && <Topdeals2 onClose2={onClose2} />}
-            </div>
-          </div>
-        </div>
       </Box>
       <Box className="third-section-adverts">
         <div className="advert-container">

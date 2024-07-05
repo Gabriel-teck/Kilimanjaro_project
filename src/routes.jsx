@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import Globallayout from "./components/Globallayout";
+import Globallayout from "./components/GlobalComponents/Globallayout";
 import Home from "./pages/Home";
 import Location from "./pages/Location";
 import About from "./pages/About";
@@ -14,7 +14,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
-import MenuLayout from "./components/MenuLayout";
+import MenuLayout from "./components/MenuComponents/MenuLayout";
 import Menu from "./pages/menus/Menu";
 
 export const router = createBrowserRouter(
@@ -30,7 +30,7 @@ export const router = createBrowserRouter(
       <Route path="privacy" element={<Privacy />} />
       <Route path="terms" element={<Terms />} />
       <Route element={<MenuLayout />}>
-         <Route path="menu" element={<Menu />} />
+        <Route path="menu" element={<Menu />} />
       </Route>
     </Route>
   )

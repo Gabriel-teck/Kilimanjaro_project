@@ -44,24 +44,19 @@
 }
 
 .Modal-scroll {
-  padding: .8rem;
+  padding: 0.8rem;
   display: flex;
   align-items: center;
-      color: #005224;
-      margin-right: auto !important;
-    margin-left: auto !important;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-top: 0;
-    margin-bottom: .5rem;
+  color: #005224;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
 }
 
 .text-center {
-    color: #62626c;
-    font-size: 1.rem;
+  color: #62626c;
+  font-size: 1rem;
 }
-
-
-
-
-

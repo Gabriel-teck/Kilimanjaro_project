@@ -1,13 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Box, Button, Icon, Typography } from "@mui/material";
 import { NavLink, Link } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Cart from "../../pages/Cart";
+import { auth, db } from "../../../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { setUser } from "../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { current } from "@reduxjs/toolkit";
+import { AiOutlineDown } from "react-icons/ai";
+import { AiOutlineUp } from "react-icons/ai";
 
 const Header = () => {
   const [showCartModal, setShowCartModal] = useState(false);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const userFromState = useSelector((state) => state.auth.user);
+  console.log("details", userFromState);
+
+  const fetchLoginDetails = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      console.log("authUser", user);
+      const docRef = doc(db, "Users", user.uid);
+      console.log("userDetails", userFromState);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // setLoggedIn(docSnap.data());
+        console.log("dispatch", docSnap.data());
+        dispatch(setUser(docSnap.data()));
+        console.log("docSnap", docSnap.data());
+      } else {
+        console.log("User is not logged in");
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchLoginDetails();
+  }, []);
+
+  const logOut = async () => {
+    try {
+      await auth.signOut();
+      window.location.href = "/login";
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const handleCartClicked = () => {
     console.log("yes");
@@ -92,12 +133,47 @@ const Header = () => {
           </span>
           {showCartModal && <Cart onClose={onClose} />}
         </Box>
-        <Link className="nav-btn first" to="login">
-          Login
-        </Link>
-        <Link className="nav-btn second" to="signup">
-          Signup
-        </Link>
+        {userFromState ? (
+          <>
+            <div className="header_btn_" style={{ cursor: "pointer" }}>
+              <div className="header_user" onClick={() => setOpen(!open)}>
+                <span className="header_user_name">
+                  {userFromState.firstname}
+                </span>
+                <span
+                  style={{
+                    width: "1em",
+                    height: "1em",
+                    verticalAlign: "middle",
+                    fontSize:"1rem",
+                    fontWeight:"800"
+                  }}
+                >
+                  {open ? <AiOutlineUp /> : <AiOutlineDown />}
+                </span>
+                <div className={`header_dropdown ${open ? "open" : "close"}`}>
+                  <div className="header_dropdown_wrapper">
+                    <Link className="header_dropdown_item " to="/profile">
+                      My Account
+                    </Link>
+                    <span className="header_dropdown_item" onClick={logOut}>
+                      Log Out
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <Link className="nav-btn first" to="login">
+              Login
+            </Link>
+            <Link className="nav-btn second" to="signup">
+              Signup
+            </Link>
+          </>
+        )}
       </Box>
     </Box>
   );

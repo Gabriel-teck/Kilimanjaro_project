@@ -357,3 +357,12 @@ button:not(:disabled) {
     right: 3px;
     background-size: contain;
 }
+
+
+.selected-pizza-type {
+  background-color: #ff8503;
+}
+
+.ingredients-selector {
+  text-decoration: line-through;
+}

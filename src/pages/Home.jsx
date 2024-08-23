@@ -16,7 +16,7 @@ const Home = () => {
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
 
-  const changeRestaurant = (e) => {
+  const changeRestaurant = () => {
     navigate("/menu");
   };
 

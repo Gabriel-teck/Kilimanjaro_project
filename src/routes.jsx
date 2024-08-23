@@ -14,8 +14,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
-import MenuLayout from "./components/MenuComponents/MenuLayout";
-import Menu from "./pages/menus/Menu";
+import Menu from "./pages/menus/menu-components/Menu";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,9 +28,7 @@ export const router = createBrowserRouter(
       <Route path="signup" element={<Signup />} />
       <Route path="privacy" element={<Privacy />} />
       <Route path="terms" element={<Terms />} />
-      <Route element={<MenuLayout />}>
-        <Route path="menu" element={<Menu />} />
-      </Route>
+      <Route path="menu" element={<Menu />} />
     </Route>
   )
 );

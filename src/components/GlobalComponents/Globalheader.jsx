@@ -1,9 +1,22 @@
 import React from "react";
+import { useState } from "react";
 import { Box, Button, Icon, Typography } from "@mui/material";
 import { NavLink, Link } from "react-router-dom";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Cart from "../../pages/Cart";
 
 const Header = () => {
+  const [showCartModal, setShowCartModal] = useState(false);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+
+  const handleCartClicked = () => {
+    console.log("yes");
+    setShowCartModal(!showCartModal);
+  };
+
+  const onClose = () => {
+    setShowCartModal(showCartModal);
+  };
   return (
     <Box
       display="flex"
@@ -52,12 +65,32 @@ const Header = () => {
         </NavLink>
       </Box>
       <Box className="header-nav-2" display="flex" alignItems="center">
-        <Box>
+        <Box onClick={handleCartClicked}>
           <img
             className="img-cart"
             src="https://pizzajungleng.com/images/cart-item.png"
             alt="cart logo"
           />
+          <span
+            style={{
+              backgroundColor: "#ff8503",
+              padding: "1px",
+              position: "relative",
+              top: "-55px",
+              left: "37px",
+              borderRadius: "50%",
+              fontSize: "12px",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+              display: "flex",
+              width: "20px",
+              height: "20px",
+            }}
+          >
+            {totalQuantity}
+          </span>
+          {showCartModal && <Cart onClose={onClose} />}
         </Box>
         <Link className="nav-btn first" to="login">
           Login

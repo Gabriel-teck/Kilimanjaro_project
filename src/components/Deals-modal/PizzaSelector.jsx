@@ -6,7 +6,6 @@ export const PizzaSelector = ({
   onPizzaSelected,
   onIngredientSelected,
   onToppingsSelected,
-  // onToppingsClicked
 }) => {
   const [pizza, setPizza] = useState(
     currentPizza.pizzaId ? currentPizza.name : ""
@@ -18,24 +17,37 @@ export const PizzaSelector = ({
   const choosePizza = (e) => {
     setPizza(e.target.value);
     const pizzaItem = pizzaProducts.find((items) => items.id == e.target.value);
-    // console.log("my name");
     setSelectedPizza(pizzaItem.ingredients);
     onPizzaSelected(pizzaItem);
+    // setPizza(currentPizza)
+  };
+
+  const onIngredientClicked = (e) => {
+    const addIngredient = checkedIngredients.find((item) => item.id == e.id);
+    if (!addIngredient) {
+      const removedIngredients = [...checkedIngredients, e];
+      setCheckedIngredients(removedIngredients);
+      onIngredientSelected(removedIngredients);
+    } else {
+      const removedIngredients = checkedIngredients.filter(
+        (item) => item.id !== e.id
+      );
+      setCheckedIngredients(removedIngredients);
+      onIngredientSelected(removedIngredients);
+    }
   };
 
   const onToppingsClicked = (e) => {
     const foundTopping = checkedToppings.find((topping) => topping.id == e.id);
     if (!foundTopping) {
-      const toppings = [...checkedToppings, e]
+      const toppings = [...checkedToppings, e];
       setCheckedToppings(toppings);
       onToppingsSelected(toppings);
     } else {
-      const toppings = checkedToppings.filter((t) => t.id !== e.id)
+      const toppings = checkedToppings.filter((t) => t.id !== e.id);
       setCheckedToppings(toppings);
       onToppingsSelected(toppings);
     }
-    console.log(foundTopping, "toppings");
-    // setCheckedToppings(foundTopping)
   };
 
   return (
@@ -54,7 +66,15 @@ export const PizzaSelector = ({
         {pizza && (
           <div>
             {selectedPizza.map((ingredient, index) => (
-              <p key={index} onClick={() => onIngredientSelected(ingredient)}>
+              <p
+                key={index}
+                className={
+                  checkedIngredients.find((item) => item.id == ingredient.id)
+                    ? "ingredients-selector"
+                    : ""
+                }
+                onClick={() => onIngredientClicked(ingredient)}
+              >
                 {ingredient.name}
               </p>
             ))}

@@ -17,7 +17,7 @@ export const TopDeals = ({ handleToggleImage1,showModal1,handleToggleImage2,show
               alt="Deals image"
               onClick={handleToggleImage1}
             ></img>
-            {showModal1 && <PartyDeals onClose={onClose} />}
+            {showModal1 && <PartyDeals  onClose={onClose} />}
           </div>
           <div className="deal-img-container">
             <img
@@ -26,7 +26,7 @@ export const TopDeals = ({ handleToggleImage1,showModal1,handleToggleImage2,show
               alt="Deals image"
               onClick={handleToggleImage2}
             ></img>
-            {showModal2 && <MegaDeals onClose={onClose} />}
+            {showModal2 && <MegaDeals  onClose={onClose} />}
           </div>
         </div>
       </div>

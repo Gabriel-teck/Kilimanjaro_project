@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
 import { AiOutlineDown } from "react-icons/ai";
 import { AiOutlineUp } from "react-icons/ai";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Header = () => {
   const [showCartModal, setShowCartModal] = useState(false);
@@ -21,18 +22,25 @@ const Header = () => {
   console.log("details", userFromState);
 
   const fetchLoginDetails = async () => {
-    auth.onAuthStateChanged(async (user) => {
-      console.log("authUser", user);
-      const docRef = doc(db, "Users", user.uid);
-      console.log("userDetails", userFromState);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        // setLoggedIn(docSnap.data());
-        console.log("dispatch", docSnap.data());
-        dispatch(setUser(docSnap.data()));
-        console.log("docSnap", docSnap.data());
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        //check if the user exists
+        try {
+          console.log("authUser", user);
+          const docRef = doc(db, "Users", user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            console.log("dispatch", docSnap.data());
+            dispatch(setUser(docSnap.data()));
+          } else {
+            console.log("No user document found in Firestore");
+          }
+        } catch (error) {
+          console.error("Error fetching user details:", error.message);
+        }
       } else {
-        console.log("User is not logged in");
+        console.log("User is not logged in or has been deleted");
+        dispatch(setUser(null)); //clearing the redux state when user is null
       }
     });
   };
@@ -44,6 +52,7 @@ const Header = () => {
   const logOut = async () => {
     try {
       await auth.signOut();
+      dispatch(setUser(null)); //resetting user state to null
       window.location.href = "/login";
     } catch (error) {
       console.log(error.message);
@@ -145,8 +154,8 @@ const Header = () => {
                     width: "1em",
                     height: "1em",
                     verticalAlign: "middle",
-                    fontSize:"1rem",
-                    fontWeight:"800"
+                    fontSize: "1rem",
+                    fontWeight: "800",
                   }}
                 >
                   {open ? <AiOutlineUp /> : <AiOutlineDown />}

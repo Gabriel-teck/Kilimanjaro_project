@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
+
 
 export const UpdatePassword = () => {
-  return (
-    <div>UpdatePassword</div>
-  )
-}
+  return <div>UpdatePassword</div>;
+};

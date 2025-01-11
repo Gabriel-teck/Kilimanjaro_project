@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import login from "../assets/login-img.webp";
 import { Link, useNavigation, Form, redirect } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
 import { auth, db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { SignInWithGoogle } from "../pages/SignInWithGoogle";
 
 export const action = async ({ request }) => {
@@ -15,24 +15,40 @@ export const action = async ({ request }) => {
   const birthdate = formData.get("birthdate");
   const phonenumber = formData.get("phonenumber");
   const gender = formData.get("gender");
+
   try {
+    // create a user with email and password
     await createUserWithEmailAndPassword(auth, email, password);
     const user = auth.currentUser;
+
+    // save user details in firestore
     if (user) {
       await setDoc(doc(db, "Users", user.uid), {
         firstname,
         lastname,
         email,
-        password,
         phonenumber,
         birthdate,
         gender,
       });
+      console.log("User is registered successfull");
     }
-    console.log("User is registered successfull");
     return redirect("/#home");
   } catch (error) {
     console.log(error.message);
+    if (error.code === "auth/email-already-in-use") {
+      alert("This email has already been used");
+    } else {
+      alert("An unexpected error occured");
+    }
+    const credentials = auth.currentUser
+    await deleteUser(credentials)
+      .then(() => {
+        //user deleted
+      })
+      .catch((error) => {
+        //an error occured
+      });
   }
   return null;
 };
@@ -161,3 +177,64 @@ const Signup = () => {
 };
 
 export default Signup;
+
+// try {
+//   let user;
+
+//   // checking to see if the user already exists in firestore Authentication
+//   try {
+//     const userCredential = await createUserWithEmailAndPassword(
+//       auth,
+//       email,
+//       password
+//     );
+//     user = userCredential.user;
+//   } catch (error) {
+//     // if email is already in use,fetch the user
+//     if (error.code === "auth/email-already-in-use") {
+//       console.warn("User already exists.Fetching existing user.");
+//       const currentUser = auth.currentUser;
+//       if (!currentUser) {
+//         throw new Error("Authentication issue.Please try logging in.");
+//       }
+//       user = currentUser;
+//     } else {
+//       throw error; //propagte other errors
+//     }
+//   }
+
+//   // check if the user's data exists in firestore
+//   const userDocRef = doc(db, "Users", user.uid);
+//   const userDoc = await getDoc(userDocRef);
+
+//   if (!userDoc.exists()) {
+//     await setDoc(userDocRef, {
+//       firstname,
+//       lastname,
+//       email,
+//       phonenumber,
+//       birthdate,
+//       gender,
+//     });
+//     console.log("User data saved to firestore successfully.");
+//   } else {
+//     console.log("User data already exists in Firestore.");
+//   }
+
+//   return redirect("/#home");
+// } catch (error) {
+//   console.log("Error during Signup or data saving:", error.message);
+//   //handle specific firebase Auth errors
+//   if (error.code === "auth/email-already-in-use") {
+//     return {
+//       error:
+//         "This email is already registered.Please log in or use a different email.",
+//     };
+//   } else if (error.code === "auth/weak-password") {
+//     return {
+//       error: "Your password is too weak.Please use a strongerpassword.",
+//     };
+//   } else {
+//     return { error: "An unexpected error occurred. Please try again later." };
+//   }
+// }

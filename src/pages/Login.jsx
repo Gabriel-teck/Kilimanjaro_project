@@ -67,7 +67,7 @@ const Login = () => {
                   onClick={onOpen}
                 >
                   Forget password?
-                  {openModal && <ForgetPassword onClose={onClose} />}
+                  {openModal && <ForgetPassword onClose={onClose} openModal={openModal}/>}
                 </span>
               </div>
               <button
